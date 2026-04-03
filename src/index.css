@@ -1,0 +1,246 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+/* --- 出欠ボタンの中央配置 & ズレ解消 --- */
+.listBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  font-size: 20px;
+  font-weight: 900;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.2);
+  color: #fff;
+}
+
+/* 以前のズレの原因を強制削除 */
+.listBtn::before { content: none !important; }
+
+.listBtn.ok { font-size: 24px; color: var(--ok); }
+.listBtn.maybe { font-size: 18px; color: var(--maybe); }
+.listBtn.no { font-size: 22px; color: var(--no); }
+
+/* ベンチ選択中のスタイル */
+.benchCard.selected-m {
+  border: 2px solid var(--maybe);
+  box-shadow: 0 0 10px var(--maybe);
+  background: rgba(250, 204, 21, 0.2);
+}
+/* --- チーム名をもっと長く表示できるようにする --- */
+.teamBlock {
+  /* 幅制限をなくし、余ったスペースを全部使う */
+  flex: 1;
+  min-width: 0;
+  margin-right: 8px; /* ボタンとの隙間確保 */
+}
+
+.teamName {
+  /* 1行で表示しきれない場合に ... にせず、文字サイズを小さくしてでも表示 */
+  white-space: nowrap;      /* 折り返さない */
+  overflow: visible;        /* はみ出しを許可（または hidden で隠す） */
+  text-overflow: clip;      /* ... にしない */
+  
+  /* フォントサイズを少し控えめに */
+  font-size: 16px; 
+  font-weight: bold;
+  
+  /* 幅100%確保 */
+  width: 100%;
+  display: block;
+}
+
+/* スマホの横画面など、画面が広い時は文字を大きくする */
+@media (min-width: 600px) {
+  .teamName {
+    font-size: 20px;
+  }
+}
+input[type="file"] {
+  padding: 10px !important;      /* 内側に余白を作る */
+  height: auto !important;       /* 高さを自動調整して文字切れを防ぐ */
+  font-size: 14px !important;    /* 文字を少し大きく */
+  line-height: 1.5 !important;   /* 行間を広げて見やすく */
+  background-color: #0f172a !important; /* 背景色を統一 */
+  color: #ffffff !important;     /* 文字色を白に */
+  cursor: pointer;               /* 押せる感じカーソルに */
+}
+
+/* スマホでファイル名が長くてはみ出るのを防ぐ */
+.adminField input[type="file"] {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (max-width: 600px) {
+  
+  /* 1. ヘッダー全体を「縦並び」にして2段にする */
+  .topbar {
+    flex-direction: column !important; /* 縦積みに変更 */
+    height: auto !important; /* 高さは自動で広げる */
+    padding: 12px !important; /* 余白を少し増やす */
+    gap: 10px !important; /* 上段と下段の隙間 */
+  }
+
+  /* 2. 上段（ロゴ・チーム名・ログアウト）の設定 */
+  .brandBar {
+    width: 100% !important; /* 横幅いっぱい使う */
+    display: flex !important;
+    justify-content: space-between !important; /* 両端に配置 */
+    align-items: center !important;
+    margin-right: 0 !important;
+  }
+
+  /* ログアウトボタンが縦にならないようにする */
+  .btn.ghost {
+    white-space: nowrap !important; /* 改行禁止 */
+    font-size: 11px !important; /* 文字を少し小さく */
+    padding: 4px 8px !important;
+    height: 32px !important; /* 高さ固定 */
+  }
+
+  /* 3. 下段（フォーメーション選択）の設定 */
+  .controls {
+    width: 100% !important; /* 横幅いっぱい使う */
+  }
+
+  .select {
+    width: 100% !important; /* 指で押しやすいように横長にする */
+    text-align: center !important;
+    height: 40px !important; /* 少し高さを出す */
+  }
+  
+  /* チーム名が長くても崩れないように */
+  .teamName {
+    font-size: 15px !important;
+    max-width: 180px; /* 横幅制限 */
+    overflow: hidden;
+    text-overflow: ellipsis; /* はみ出たら...にする */
+  }
+}
+/* =========================================
+   緊急修正コマンド（一番下に貼り付けてください）
+   ========================================= */
+
+/* --- 1. チーム名を「絶対に省略せず全部表示」する設定 --- */
+.brandBar, .brandLeft, .teamBlock {
+  /* 名前が長くなっても領域が広がるようにする */
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.teamName {
+  /* 折り返しを許可し、全部表示する */
+  white-space: normal !important;    /* 必要なら改行する */
+  overflow: visible !important;      /* 隠さない */
+  text-overflow: clip !important;    /* "..."を出さない */
+  word-break: break-word !important; /* 長すぎる単語は途中で折る */
+  
+  width: auto !important;
+  height: auto !important;
+  max-width: none !important;        /* 幅の制限をなくす */
+  
+  /* フォントサイズ調整（スマホで見やすい大きさ） */
+  font-size: 16px !important;
+  line-height: 1.2 !important;       /* 行間を少し詰める */
+}
+
+/* スマホ表示の時も強制的に上記ルールを適用 */
+@media (max-width: 600px) {
+  .teamName {
+    max-width: none !important;
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+}
+
+
+/* --- 2. ファイル選択ボタンを「枠の真ん中」にする設定 --- */
+input[type="file"] {
+  /* 他の入力欄(44px)と同じ高さに合わせて固定する */
+  height: 44px !important;
+  
+  /* 内部の要素を上下中央に揃える */
+  display: flex !important;
+  align-items: center !important;
+  
+  /* 余白の調整 */
+  padding: 0 10px !important;
+  margin: 0 !important;
+  
+  /* 見た目を整える */
+  background-color: #0f172a !important;
+  border: 1px solid #334155 !important;
+  border-radius: 6px !important;
+}
