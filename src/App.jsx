@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, onValue, remove } from "firebase/database";
+import { getDatabase, ref, onValue, set, remove, get, update } from "firebase/database";
 import "./App.css";
 
 // ------------------------------------------
